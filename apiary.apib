@@ -5,7 +5,7 @@ HOST: https://zoho.syncdatamaster.com/sync/
 
 ZohoEasySync выполняет синхронизацию данных с ZohoCRM  в локальные базы данных MySQL
 
-## Запуск синхронизации [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}]
+## Запуск синхронизации [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}&{truncate}]
 
 + Parameters
     + account (required, string) - Уникальный идентификатор клиента
@@ -17,6 +17,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + dbname (required, string) - Название базы данных
     + modules (required, string) - Список синхронизируемых модулей
     + datefrom (optional, date) - Синхронизация записей, созданных/изменненных после указанной даты 
+    + truncate (optional, string) - Полная очистка таблиц указанных модулей
     
 ### Отправка запроса [POST]
 
