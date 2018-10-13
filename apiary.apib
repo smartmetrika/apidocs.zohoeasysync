@@ -7,6 +7,9 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 
 ## Запуск синхронизации [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}&{truncate}]
 
+При отправке запроса синхронизации возможно передать или параметр datefrom, или параметр truncate. 
+Одновременно оба эти параметры указывать text descне нужно.
+
 + Parameters
     + account (required, string) - Уникальный идентификатор клиента
     + token (required, string) - Токен ZohoCRM
@@ -63,8 +66,10 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 
 ## Проверка статуса процесса [/status/{processid}]
 
+Значение уникального идентификатора процесса processid возвращается в ответе на запрос запуска синхронизации.
+
 + Parameters
-    + processid (required, integer) - Уникальный идентификатор процесса, полученного в ответе при запуске синхронизации
+    + processid (required, integer) - Уникальный идентификатор процесса
 
 
 ### Отправка запроса [POST]
@@ -110,8 +115,10 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
             
 ## Отмена процесса [/stop/{processid}]
 
+Значение уникального идентификатора процесса processid возвращается в ответе на запрос запуска синхронизации.
+
 + Parameters
-    + processid (required, integer) - Уникальный идентификатор процесса, полученного в ответе при запуске синхронизации
+    + processid (required, integer) - Уникальный идентификатор процесса
 
 
 ### Отправка запроса [POST]
