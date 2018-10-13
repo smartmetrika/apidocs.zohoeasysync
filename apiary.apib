@@ -66,6 +66,10 @@ HOST: https://zoho.syncdatamaster.com/sync/
     + processid (required, processid) - Уникальный идентификатор процесса, полученного в ответе при запуске синхронизации
 
 
+### Отправка запроса [POST]
+
++ Request (application/json)
+
         {
             "question": "Favourite programming language?",
             "choices": [
@@ -75,8 +79,6 @@ HOST: https://zoho.syncdatamaster.com/sync/
                 "Ruby"
             ]
         }
-
-### Отправка запроса [POST]
 
 + Response 200 (application/json)
 
@@ -103,8 +105,7 @@ HOST: https://zoho.syncdatamaster.com/sync/
                         "choice": "Ruby",
                         "votes": 0
                     }
-                ]
-            }
+               
             
 ## Отмена процесса [/stop/{processid}]
 
@@ -114,6 +115,8 @@ HOST: https://zoho.syncdatamaster.com/sync/
 
 ### Отправка запроса [POST]
 
+
++ Request (application/json)
 
         {
             "question": "Favourite programming language?",
@@ -130,3 +133,23 @@ HOST: https://zoho.syncdatamaster.com/sync/
     + Headers
 
             Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
