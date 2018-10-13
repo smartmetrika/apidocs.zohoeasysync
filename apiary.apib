@@ -65,34 +65,90 @@ HOST: https://zoho.syncdatamaster.com/sync/
 + Parameters
     + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
 
-## Отмена процесса [/stop/{processid}]
 
-+ Parameters
-    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
 
-
-### Обработка ответа [GET]
+### Отправка запроса [POST]
 
 + Response 200 (application/json)
 
-        [
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
             {
                 "question": "Favourite programming language?",
                 "published_at": "2015-08-05T08:40:51.620Z",
                 "choices": [
                     {
                         "choice": "Swift",
-                        "votes": 2048
+                        "votes": 0
                     }, {
                         "choice": "Python",
-                        "votes": 1024
+                        "votes": 0
                     }, {
                         "choice": "Objective-C",
-                        "votes": 512
+                        "votes": 0
                     }, {
                         "choice": "Ruby",
-                        "votes": 256
+                        "votes": 0
                     }
                 ]
             }
-        ]
+            
+## Отмена процесса [/stop/{processid}]
+
++ Parameters
+    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
+
+
+### Отправка запроса [POST]
+
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
