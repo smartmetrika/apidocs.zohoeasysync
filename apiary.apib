@@ -5,7 +5,7 @@ HOST: https://zoho.syncdatamaster.com/sync/
 
 Ресурс ZohoEasySync выполняет синхронизацию данных с ZohoCRM  в локальные базы данных MySQL
 
-## Выполнение запроса [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}]
+## Запуск синхронизации [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}]
 
 + Parameters
     + account (required, string) - Уникальный идентификатор клиента
@@ -59,6 +59,16 @@ HOST: https://zoho.syncdatamaster.com/sync/
                     }
                 ]
             }
+
+## Проверка статуса процесса [/status/{processid}]
+
++ Parameters
+    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
+
+## Отмена процесса [/stop/{processid}]
+
++ Parameters
+    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
 
 
 ### Обработка ответа [GET]
