@@ -63,7 +63,7 @@ HOST: https://zoho.syncdatamaster.com/sync/
 ## Проверка статуса процесса [/status/{processid}]
 
 + Parameters
-    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
+    + processid (required, processid) - Уникальный идентификатор процесса, полученного в ответе при запуске синхронизации
 
 
         {
@@ -109,7 +109,7 @@ HOST: https://zoho.syncdatamaster.com/sync/
 ## Отмена процесса [/stop/{processid}]
 
 + Parameters
-    + processid (required, processid) - Уникальный идентификатор процесса, полученного в отчете при запуске синхронизации
+    + processid (required, processid) - Уникальный идентификатор процесса, полученного в ответе при запуске синхронизации
 
 
 ### Отправка запроса [POST]
@@ -130,25 +130,3 @@ HOST: https://zoho.syncdatamaster.com/sync/
     + Headers
 
             Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
