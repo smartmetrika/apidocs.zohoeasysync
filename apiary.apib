@@ -45,28 +45,17 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "processid": 154541
             }
 
 ## Проверка статуса процесса [/status/{processid}]
 
 Значение уникального идентификатора процесса processid возвращается в ответе на запрос запуска синхронизации.
+Статусы:
+waiting 205
+inprogress 206
+canceled 207
+
 
 + Parameters
     + processid (required, integer) - Уникальный идентификатор процесса
@@ -77,13 +66,9 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "processid": 154541,
+            "statuscode": 205,
+            "status": "waiting"
         }
 
 + Response 200 (application/json)
@@ -95,22 +80,8 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
+                "processid": 154541
+            }
                
             
 ## Отмена процесса [/stop/{processid}]
