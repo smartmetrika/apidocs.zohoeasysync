@@ -5,23 +5,28 @@ HOST: https://zoho.syncdatamaster.com/sync/
 
 ZohoEasySync выполняет синхронизацию данных с ZohoCRM  в локальные базы данных MySQL
 
-## Запуск синхронизации [/run/{account}&{token}&{dbhost}&{dbport}&{dbuser}&{dbpass}&{dbname}&{modules}&{datefrom}&{truncate}]
+## Запуск синхронизации [/run/]
 
+
+
+| Параметр | Описание                                                          |     Тип    | Обязательный |
+|----------|-------------------------------------------------------------------|:----------:|:------------:|
+| account  | Уникальный идентификатор клиента                                  |   String   |      Да      |
+| token    | Токен ZohoCRM                                                     |   String   |      Да      |
+| dbhost   | Хост базы данных                                                  |   String   |      Да      |
+| dbport   | Порт базы данных                                                  |   Integer  |      Да      |
+| dbuser   | Пользователь базы данных                                          |   String   |      Да      |
+| dbpass   | Пароль пользователя базы данных                                   |   String   |      Да      |
+| dbname   | Название базы данных                                              |   String   |      Да      |
+| modules  | Список синхронизируемых модулей                                   |   String   |      Да      |
+| datefrom | Синхронизация записей, созданных/изменненных после указанной даты |    Date    |      Нет     |
+| truncate | Полная очистка таблиц указанных модулей перед синхронизацией      |   String   |      Нет     |
+   
+   
 При отправке запроса синхронизации возможно передать или параметр **datefrom**, или параметр **truncate**. 
 Одновременно оба эти параметры указывать не нужно.
 
-+ Parameters
-    + account (required, string) - Уникальный идентификатор клиента
-    + token (required, string) - Токен ZohoCRM
-    + dbhost (required, string) - Хост базы данных
-    + dbport (required, integer) - Порт базы данных
-    + dbuser (required, string) - Пользователь базы данных
-    + dbpass (required, string) - Пароль пользователя базы данных
-    + dbname (required, string) - Название базы данных
-    + modules (required, string) - Список синхронизируемых модулей
-    + datefrom (optional, date) - Синхронизация записей, созданных/изменненных после указанной даты 
-    + truncate (optional, string) - Полная очистка таблиц указанных модулей перед синхронизацией
-    
+
 ### Отправка запроса [POST]
 
 + Request (application/json)
@@ -31,18 +36,33 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
             Login: testLogin,
             Password: testPassword
             
+    + Body
+
+            {
+                "account": "3110002454545724579",
+                "token": "xmdf7xdsf67sdj7dsf",
+                "dbhost": "10.10.10.10",
+                "dbport": 3306,
+                "dbuser": "someuser",
+                "dbpass": "somepassword",
+                "dbname": "zohosync",
+                "modules": "Products,Contacts,Potentials,Sales_Orders"
+                "datefrom": "2018-01-01"
+            }
+
+            
             
 + Response 200 (application/json)
 
     + Body
 
             {
-                "processid": 154541
+                "process_id": 154541
             }
 
-## Проверка статуса процесса [/status/{processid}]
+## Проверка статуса процесса [/status/{process_id}]
 
-Значение уникального идентификатора процесса **processid** возвращается в ответе на запрос запуска синхронизации.
+Значение уникального идентификатора процесса **process_id** возвращается в ответе на запрос запуска синхронизации.
 
 | Статус     | Код статуса | Описание                       |
 |------------|:-----------:|--------------------------------|
@@ -53,7 +73,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 
 
 + Parameters
-    + processid (required, integer) - Уникальный идентификатор процесса
+    + process_id (required, integer) - Уникальный идентификатор процесса
 
 
 ### Отправка запроса [POST]
@@ -68,7 +88,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "processid": 154541
+                "process_id": 154541
             }
 
 + Response 200 (application/json)
@@ -76,18 +96,18 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "processid": 154541,
+                "process_id": 154541,
                 "statuscode": 205,
                 "status": "waiting"
             }
                
             
-## Отмена процесса [/stop/{processid}]
+## Отмена процесса [/stop/{process_id}]
 
-Значение уникального идентификатора процесса **processid** возвращается в ответе на запрос запуска синхронизации.
+Значение уникального идентификатора процесса **process_id** возвращается в ответе на запрос запуска синхронизации.
 
 + Parameters
-    + processid (required, integer) - Уникальный идентификатор процесса
+    + process_id (required, integer) - Уникальный идентификатор процесса
 
 
 ### Отправка запроса [POST]
@@ -103,7 +123,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "processid": 154541
+                "process_id": 154541
             }
 
 
@@ -112,7 +132,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "processid": 154541,
+                "process_id": 154541,
                 "statuscode": 207,
                 "status": "canceled"
             }
