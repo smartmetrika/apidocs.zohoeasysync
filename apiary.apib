@@ -14,7 +14,7 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + account (required, string) - Уникальный идентификатор клиента
     + token (required, string) - Токен ZohoCRM
     + dbhost (required, string) - Хост базы данных
-    + dbport (required, string) - Порт базы данных
+    + dbport (required, integer) - Порт базы данных
     + dbuser (required, string) - Пользователь базы данных
     + dbpass (required, string) - Пароль пользователя базы данных
     + dbname (required, string) - Название базы данных
@@ -26,21 +26,13 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 200 (application/json)
-
     + Headers
-
-            Location: /questions/2
+    
+            Login: testLogin,
+            Password: testPassword
+            
+            
++ Response 200 (application/json)
 
     + Body
 
@@ -51,10 +43,12 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 ## Проверка статуса процесса [/status/{processid}]
 
 Значение уникального идентификатора процесса processid возвращается в ответе на запрос запуска синхронизации.
+
 Статусы:
-waiting 205
-inprogress 206
-canceled 207
+-completed 204
+-waiting 205
+-inprogress 206
+-canceled 207
 
 
 + Parameters
@@ -65,22 +59,25 @@ canceled 207
 
 + Request (application/json)
 
-        {
-            "processid": 154541,
-            "statuscode": 205,
-            "status": "waiting"
-        }
-
-+ Response 200 (application/json)
-
     + Headers
 
-            Location: /questions/2
+            Login: testLogin,
+            Password: testPassword
 
     + Body
 
             {
                 "processid": 154541
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "processid": 154541,
+                "statuscode": 205,
+                "status": "waiting"
             }
                
             
@@ -97,38 +94,24 @@ canceled 207
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 200 (application/json)
-
     + Headers
 
-            Location: /questions/2
+            Login: testLogin,
+            Password: testPassword
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
+                "processid": 154541
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "processid": 154541,
+                "statuscode": 207,
+                "status": "canceled"
+            }
