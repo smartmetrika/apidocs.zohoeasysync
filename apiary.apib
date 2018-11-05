@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://zoho.syncdatamaster.com/sync/
+HOST: https://zoho.syncdatamaster.com/
 
 # ZohoEasySync
 
@@ -12,8 +12,56 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
  - Отправка задач синхронизации возможна только с утвержденных IP.
 
  - Количество обращений с одного IP ограничено 70 запросами в минуту.
+ 
+ 
+## Список модулей [/crm/modules/]
 
-## Запуск синхронизации [/run/]
+
+
+| Параметр | Описание                                                          |     Тип    | Обязательный |
+|----------|-------------------------------------------------------------------|:----------:|:------------:|
+| token    | Токен ZohoCRM                                                     |   String   |      Да      |
+
+
+
+
+### Отправка запроса [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            Login: testLogin,
+            Password: testPassword
+            
+    + Body
+
+            {
+                "token": "xmdf7xdsf67sdj7dsf",
+            }
+
+            
+            
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                    "Home",
+                    "Contacts",
+                    "Sales_Orders",
+                    "Invoices",
+                    "Deals",
+                    "Tasks",
+                    "Events",
+                    "Activities",
+                    "Calls",
+                    "Reports",
+                    "Leads"
+            }
+            
+
+## Запуск синхронизации [/sync/run/]
 
 
 
@@ -69,16 +117,23 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
                 "process_id": 0123456789
             }
 
-## Проверка статуса процесса [/status/{process_id}]
+## Проверка статуса процесса [/sync/status/{process_id}]
 
 Значение уникального идентификатора процесса **process_id** возвращается в ответе на запрос запуска синхронизации.
 
-| Статус     | Описание                       |
-|------------|--------------------------------|
-| completed  | Синхронизация выполнена        |
-| waiting    | Задача синхронизации в очереди |
-| inprogress | Синхронизация выполняется      |
-| canceled   | Задача синхронизации отменена  |
+
+
+Соответствие кодов статусов:
+
+| Код | Статус     | Описание                       |
+|-----|------------|--------------------------------|
+|  1  | waiting    | Задача синхронизации в очереди |
+|  2  | inprogress | Синхронизация выполняется      |
+|  3  | completed  | Синхронизация выполнена        |
+|  4  | canceled   | Задача синхронизации отменена  |
+
+
+В теле ответа **queries** отображает количество использованых API-запросов по данному процессу
 
 + Parameters
     + process_id (required, Integer) - Идентификатор процесса
@@ -98,11 +153,13 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
     + Body
 
             {
-                "status": "waiting"
+                "account": "ШАЯ",
+                "status": 4,
+                "queries": 30
             }
                
             
-## Отмена процесса [/stop/]
+## Отмена процесса [/sync/stop/]
 
 Значение уникального идентификатора процесса **process_id** возвращается в ответе на запрос запуска синхронизации.
 
@@ -131,4 +188,38 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
 
             {
                 "status": "Process was stopped"
+            }
+            
+## Использование API-запросов [/info/queries-count/]
+
+
+
+
+
+### Отправка запроса [POST]
+
+
++ Request (application/json)
+
+    + Headers
+
+            Login: testLogin,
+            Password: testPassword
+
+    + Body
+
+            {
+                "account": "3110002454545724579",
+                "from": 2018-01-01 10:00:00,
+                "to": 2018-01-02 09:59:59,
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "account": "3110002454545724579",
+                "count": 500
             }
