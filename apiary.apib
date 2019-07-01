@@ -233,3 +233,50 @@ ZohoEasySync выполняет синхронизацию данных с ZohoC
                 "account": "3110002454545724579",
                 "count": 500
             }
+            
+## Получение логов [/sync/log/123456789]
+
+- Используется пагинация 
+- В ответе отображается до 200 записей на одну страницу запроса
+
+| Параметр    | Описание                                                          |     Тип    | Обязательный |
+|-------------|-------------------------------------------------------------------|:----------:|:------------:|
+| account     | Уникальный идентификатор клиента                                  |   String   |      Да      |   
+| last_hours  | Количество часов, за которые отправляются логи                    |   Integer  |      Нет     | 
+
+По умолчанию значение **last_hours** равно 24.
+
+### Отправка запроса [POST]
+
+
++ Request (application/json)
+
+    + Headers
+
+            Login: testLogin,
+            Password: testPassword
+
+    + Body
+
+            {
+                "last_hours": 24
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "account": "123456789",
+                "date": "2019-07-01 20:00:09",
+                "dbhost": "database",
+                "dbname": "zoho",
+                "dbuser": "zoho",
+                "modules": "Contacts,Deals,Leads,Tasks",
+                "parameters": "{\"--query-limit\":3000,\"--query-timeout\":3600}",
+                "queries_count": 1,
+                "sync_duration": 9,
+                "error_code": "",
+                "status": "completed"
+            }
